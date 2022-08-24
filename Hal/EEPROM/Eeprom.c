@@ -29,7 +29,7 @@ u8   H_Eeprom_Read(u8 Local_u8_PageAddress,u8 Local_u8_ByteAddress)
 	M_I2c_SendSByte(Local_u8_ByteAddress);
 	M_I2c_RepeatedStart();
 	M_I2c_SendSlaveAddressRead((0x50 | Local_u8_PageAddress));
-	Local_u8_Data = M_I2c_ReadByte();
+	Local_u8_Data = M_I2c_ReadByteNoAck();
 	M_I2c_StopCondition();
 	return Local_u8_Data;
 }

@@ -9,11 +9,15 @@
 #ifndef I2C_H_
 #define I2C_H_
 
+
 /*********************************_INCLUDES_****************************************/
 #include "I2cCfg.h"
 #include "StdTypes.h"
 #include "BitMath.h"
 #include "Reg.h"
+#define F_CPU 16000000UL
+
+#include <util/delay.h>
 /***********************************_MACOS_*****************************************/
 #define I2C_MASTER                        1
 #define I2C_SLAVE                         2
@@ -37,4 +41,5 @@ void M_I2c_SendSByte(u8);
 u8   M_I2c_ReadByte(void);
 void M_I2c_RepeatedStart(void);
 void M_I2c_StopCondition(void);
+u8 M_I2c_ReadByteNoAck();
 #endif /* I2C_H_ */
