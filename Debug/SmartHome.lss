@@ -13,19 +13,19 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY
   4 .debug_aranges 000001b8  00000000  00000000  00000f6c  2**0
                   CONTENTS, READONLY, DEBUGGING
-  5 .debug_info   00002f60  00000000  00000000  00001124  2**0
+  5 .debug_info   00002f5a  00000000  00000000  00001124  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_abbrev 00000d07  00000000  00000000  00004084  2**0
+  6 .debug_abbrev 00000d07  00000000  00000000  0000407e  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_line   000017d9  00000000  00000000  00004d8b  2**0
+  7 .debug_line   000017db  00000000  00000000  00004d85  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_frame  00000468  00000000  00000000  00006564  2**2
+  8 .debug_frame  00000468  00000000  00000000  00006560  2**2
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_str    000008e1  00000000  00000000  000069cc  2**0
+  9 .debug_str    000008e1  00000000  00000000  000069c8  2**0
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_loc    0000226c  00000000  00000000  000072ad  2**0
+ 10 .debug_loc    0000226c  00000000  00000000  000072a9  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_ranges 000001b8  00000000  00000000  00009519  2**0
+ 11 .debug_ranges 000001b8  00000000  00000000  00009515  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -495,10 +495,6 @@ int main ()
  23e:	64 e6       	ldi	r22, 0x64	; 100
  240:	80 e0       	ldi	r24, 0x00	; 0
  242:	0e 94 4b 01 	call	0x296	; 0x296 <H_Eeprom_Read>
-// 	
-// 	H_Lcd_Clear();
-// 	AdminLogin(AdminID,AdminPassword);
-
 
 	u8 UserID		[3]	= {0,0,0};
  246:	19 82       	std	Y+1, r1	; 0x01
@@ -532,9 +528,7 @@ int main ()
  278:	0e 94 ea 00 	call	0x1d4	; 0x1d4 <InputPassword>
 	H_Lcd_Clear();
  27c:	0e 94 49 04 	call	0x892	; 0x892 <H_Lcd_Clear>
-//	AddUser(UserID,UserPassword);
-// 	DeleteUser(NumberOfUsers,UserID);
-	UserLogin(UserID,UserPassword);
+	UserLogin(UserID,UserPassword);	
  280:	be 01       	movw	r22, r28
  282:	6c 5f       	subi	r22, 0xFC	; 252
  284:	7f 4f       	sbci	r23, 0xFF	; 255

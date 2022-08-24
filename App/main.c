@@ -44,26 +44,6 @@ int main ()
 	char NumberOfUsers = 0;
 	NumberOfUsers = H_Eeprom_Read(0,100);
 
-// 	H_Lcd_WriteString("Welcome To your");
-// 	H_Lcd_GoTo(1,0);
-// 	H_Lcd_WriteString("Smart Home");
-// 	_delay_ms(1000);
-	
-// 	u8 AdminID		 [3] = {0,0,0};
-// 	u8 AdminPassword [4] = {0,0,0,0};
-// 	
-// 	H_Lcd_Clear();
-// 	H_Lcd_WriteString("Enter ID");
-// 	InputID(AdminID);
-// 	
-// 	H_Lcd_Clear();
-// 	H_Lcd_WriteString("Enter Password");
-// 	InputPassword(AdminPassword);
-// 	
-// 	H_Lcd_Clear();
-// 	AdminLogin(AdminID,AdminPassword);
-
-
 	u8 UserID		[3]	= {0,0,0};
 	u8 UserPassword [4] = {0,0,0,0};	
 	H_Lcd_Clear();
@@ -74,15 +54,8 @@ int main ()
 	H_Lcd_WriteString("Enter Password");
 	InputPassword(UserPassword);	
 	H_Lcd_Clear();
-//	AddUser(UserID,UserPassword);
-// 	DeleteUser(NumberOfUsers,UserID);
-	UserLogin(UserID,UserPassword);
-	
-	
-//	H_Lcd_Clear();
-//	H_Lcd_WriteNumber(H_Eeprom_Read(0,1));
-//	CheckEEPROM();
-//	DeleteAll();
+	UserLogin(UserID,UserPassword);	
+
 	while (1)
 	{
 	}

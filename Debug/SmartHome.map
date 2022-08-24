@@ -961,15 +961,15 @@ END GROUP
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x00000000     0x2f60
+.debug_info     0x00000000     0x2f5a
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x00000000      0x4e6 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega32/avr5/crtatmega32.o
- .debug_info    0x000004e6      0xf69 App/main.o
- .debug_info    0x0000144f      0x259 Hal/EEPROM/Eeprom.o
- .debug_info    0x000016a8      0xca1 Hal/Keypad/KeyPad.o
- .debug_info    0x00002349      0x6c2 Hal/Lcd/Lcd.o
- .debug_info    0x00002a0b      0x1fa Mcal/Dio/Dio.o
- .debug_info    0x00002c05      0x35b Mcal/I2C/I2c.o
+ .debug_info    0x000004e6      0xf63 App/main.o
+ .debug_info    0x00001449      0x259 Hal/EEPROM/Eeprom.o
+ .debug_info    0x000016a2      0xca1 Hal/Keypad/KeyPad.o
+ .debug_info    0x00002343      0x6c2 Hal/Lcd/Lcd.o
+ .debug_info    0x00002a05      0x1fa Mcal/Dio/Dio.o
+ .debug_info    0x00002bff      0x35b Mcal/I2C/I2c.o
 
 .debug_abbrev   0x00000000      0xd07
  *(.debug_abbrev)
@@ -981,15 +981,15 @@ END GROUP
  .debug_abbrev  0x00000b00       0xb8 Mcal/Dio/Dio.o
  .debug_abbrev  0x00000bb8      0x14f Mcal/I2C/I2c.o
 
-.debug_line     0x00000000     0x17d9
+.debug_line     0x00000000     0x17db
  *(.debug_line .debug_line.* .debug_line_end)
  .debug_line    0x00000000      0x116 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega32/avr5/crtatmega32.o
- .debug_line    0x00000116      0x8e1 App/main.o
- .debug_line    0x000009f7       0xee Hal/EEPROM/Eeprom.o
- .debug_line    0x00000ae5      0x4c2 Hal/Keypad/KeyPad.o
- .debug_line    0x00000fa7      0x37a Hal/Lcd/Lcd.o
- .debug_line    0x00001321      0x1e1 Mcal/Dio/Dio.o
- .debug_line    0x00001502      0x2d7 Mcal/I2C/I2c.o
+ .debug_line    0x00000116      0x8e3 App/main.o
+ .debug_line    0x000009f9       0xee Hal/EEPROM/Eeprom.o
+ .debug_line    0x00000ae7      0x4c2 Hal/Keypad/KeyPad.o
+ .debug_line    0x00000fa9      0x37a Hal/Lcd/Lcd.o
+ .debug_line    0x00001323      0x1e1 Mcal/Dio/Dio.o
+ .debug_line    0x00001504      0x2d7 Mcal/I2C/I2c.o
 
 .debug_frame    0x00000000      0x468
  *(.debug_frame)
