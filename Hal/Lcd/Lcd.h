@@ -20,13 +20,13 @@
 #define LCD_CMD_FIRST_ROW						0X80
 #define LCD_CMD_SECOND_ROW						0XC0
 
-#define	_4_BIT_MODE								0
-#define _8_BIT_MODE								1
+#define	_4_BIT_MODE								1
+#define _8_BIT_MODE								2
 
 /***************************************_INCLUDES_***************************************/
 #include "Dio.h"
 #include "StdTypes.h"
-#include "BitMath.h"
+
 #include "LcdCfg.h"
 #include <util/delay.h>
 
