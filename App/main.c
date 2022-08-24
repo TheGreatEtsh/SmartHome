@@ -42,21 +42,21 @@ int main ()
 	H_KeyPad_Init();
 	H_Eeprom_Init();
 	char NumberOfUsers = 0;
-<<<<<<< Updated upstream
+
 	NumberOfUsers = H_Eeprom_Read(0,100);
 
-	u8 UserID		[3]	= {0,0,0};
-	u8 UserPassword [4] = {0,0,0,0};	
-	H_Lcd_Clear();
-	H_Lcd_WriteString("Enter ID");
-	InputID(UserID);
-	
-	H_Lcd_Clear();
-	H_Lcd_WriteString("Enter Password");
-	InputPassword(UserPassword);	
-	H_Lcd_Clear();
-	UserLogin(UserID,UserPassword);	
-=======
+// 	u8 UserID		[3]	= {0,0,0};
+// 	u8 UserPassword [4] = {0,0,0,0};	
+// 	H_Lcd_Clear();
+// 	H_Lcd_WriteString("Enter ID");
+// 	InputID(UserID);
+// 	
+// 	H_Lcd_Clear();
+// 	H_Lcd_WriteString("Enter Password");
+// 	InputPassword(UserPassword);	
+// 	H_Lcd_Clear();
+// 	UserLogin(UserID,UserPassword);	
+// 
 // 	NumberOfUsers = H_Eeprom_Read(0,100);
 // 
 // 	u8 UserID		[3]	= {0,0,0};
@@ -73,11 +73,13 @@ int main ()
 	H_DcMotor_Init();
 	H_DcMotor_SetDirection(CW);
 	H_DcMotor_Speed(100);
+	_delay_ms(200);
 	H_DcMotor_Start();
-	_delay_ms(2000);
+	_delay_ms(200);
 	H_DcMotor_Stop();
-	
->>>>>>> Stashed changes
+	_delay_ms(1000);
+	H_DcMotor_Start();
+
 
 	while (1)
 	{

@@ -133,11 +133,13 @@ void M_Pwm2_SetDutyCycle		(u8 Local_u8_DesiredDutyCycle)
 void M_Pwm2_Start				(void)
 {
 	M_Timer2_Start();
+	M_Dio_PinMode(PD7,OUTPUT);
 }
 
 void M_Pwm2_Stop				(void)
 {
 	M_Timer2_Stop();
+	M_Dio_PinMode(PD7,INPUT);
 }
 
 

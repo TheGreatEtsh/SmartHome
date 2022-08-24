@@ -13,11 +13,7 @@ App/main.d App/main.o: ../App/main.c ../Hal/Led/Led.h ../Mcal/Dio/Dio.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdarg.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stddef.h \
  ../Mcal/Timer1/Timer1Cfg.h ../Hal/DcMotor/DcMotor.h \
-<<<<<<< Updated upstream
- ../Mcal/Timer0/Timer0.h ../Mcal/Timer0/Timer0Cfg.h \
-=======
  ../Mcal/Timer2/Timer2.h ../Mcal/Timer2/Timer2Cfg.h \
->>>>>>> Stashed changes
  ../Hal/DcMotor/DcMotorCfg.h ../Hal/LM35/Lm35.h ../Mcal/Adc/Adc.h \
  ../Mcal/Adc/AdcCfg.h ../Hal/LM35/Lm35Cfg.h ../Hal/EEPROM/Eeprom.h \
  ../Hal/EEPROM/EepromCfg.h ../Mcal/I2C/I2c.h ../Mcal/I2C/I2cCfg.h
@@ -74,15 +70,9 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\
 
 ../Hal/DcMotor/DcMotor.h:
 
-<<<<<<< Updated upstream
-../Mcal/Timer0/Timer0.h:
-
-../Mcal/Timer0/Timer0Cfg.h:
-=======
 ../Mcal/Timer2/Timer2.h:
 
 ../Mcal/Timer2/Timer2Cfg.h:
->>>>>>> Stashed changes
 
 ../Hal/DcMotor/DcMotorCfg.h:
 
