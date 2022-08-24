@@ -115,6 +115,7 @@
       <Value>../Mcal/Timer0</Value>
       <Value>../Mcal/I2C</Value>
       <Value>../Hal/EEPROM</Value>
+      <Value>../Mcal/Timer2</Value>
     </ListValues>
   </avrgcc.compiler.directories.IncludePaths>
   <avrgcc.compiler.optimization.level>Optimize debugging experience (-Og)</avrgcc.compiler.optimization.level>
@@ -263,6 +264,15 @@
     <Compile Include="Mcal\Timer1\Timer1Cfg.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="Mcal\Timer2\Timer2.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Mcal\Timer2\Timer2.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Mcal\Timer2\Timer2Cfg.h">
+      <SubType>compile</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App" />
@@ -280,6 +290,7 @@
     <Folder Include="Mcal\Dio" />
     <Folder Include="Mcal\Adc" />
     <Folder Include="Mcal\I2C" />
+    <Folder Include="Mcal\Timer2" />
     <Folder Include="Mcal\Timer0" />
     <Folder Include="Mcal\Timer1" />
   </ItemGroup>

@@ -30,3 +30,5 @@ Mcal\Timer0\Timer0.c
 
 Mcal\Timer1\Timer1.c
 
+Mcal\Timer2\Timer2.c
+

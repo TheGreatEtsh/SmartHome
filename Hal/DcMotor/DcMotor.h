@@ -19,7 +19,7 @@
 #include "Dio.h"
 #include "StdTypes.h"
 #include "BitMath.h"
-#include "Timer0.h"
+#include "Timer2.h"
 #include "DcMotorCfg.h"
 /***************************************_PROTOTYPES_*************************************/
 

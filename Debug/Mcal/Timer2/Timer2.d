@@ -1,5 +1,5 @@
-Mcal/Timer0/Timer0.d Mcal/Timer0/Timer0.o: ../Mcal/Timer0/Timer0.c \
- ../Mcal/Timer0/Timer0.h \
+Mcal/Timer2/Timer2.d Mcal/Timer2/Timer2.o: ../Mcal/Timer2/Timer2.c \
+ ../Mcal/Timer2/Timer2.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdio.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\inttypes.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdint.h \
@@ -10,9 +10,9 @@ Mcal/Timer0/Timer0.d Mcal/Timer0/Timer0.o: ../Mcal/Timer0/Timer0.c \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\util\delay_basic.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\math.h \
  ../Mcal/Dio/Dio.h ../Mcal/Reg.h ../App/StdTypes.h ../App/BitMath.h \
- ../Mcal/Timer0/Timer0Cfg.h
+ ../Mcal/Timer2/Timer2Cfg.h
 
-../Mcal/Timer0/Timer0.h:
+../Mcal/Timer2/Timer2.h:
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdio.h:
 
@@ -40,4 +40,4 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\
 
 ../App/BitMath.h:
 
-../Mcal/Timer0/Timer0Cfg.h:
+../Mcal/Timer2/Timer2Cfg.h:
