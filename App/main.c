@@ -41,6 +41,9 @@ int main ()
 	H_Lcd_Init();
 	H_KeyPad_Init();
 	H_Eeprom_Init();
+	H_DcMotor_Init();
+	H_Lm35_Init();
+	
 	char NumberOfUsers = 0;
 
 	NumberOfUsers = H_Eeprom_Read(0,100);
@@ -70,19 +73,29 @@ int main ()
 // 	InputPassword(UserPassword);	
 // 	H_Lcd_Clear();
 // 	UserLogin(UserID,UserPassword);	
-	H_DcMotor_Init();
-	H_DcMotor_SetDirection(CW);
-	H_DcMotor_Speed(100);
-	_delay_ms(200);
-	H_DcMotor_Start();
-	_delay_ms(200);
-	H_DcMotor_Stop();
-	_delay_ms(1000);
-	H_DcMotor_Start();
-
-
+	
+	u16 LM35Read =0;
+	
+// 	H_DcMotor_SetDirection(CW);
+// 	H_DcMotor_Speed(100);
+// 	H_DcMotor_Start(	
 	while (1)
 	{
+		LM35Read = H_Lm35_Read();
+		H_Lcd_WriteNumber(LM35Read);
+		_delay_ms(100);
+		H_Lcd_Clear();
+		if (LM35Read > 25)
+		{
+			H_DcMotor_SetDirection(CW);
+			H_DcMotor_Speed(100);
+			H_DcMotor_Start();
+		}
+		else
+		{
+			H_DcMotor_Stop();
+		}
+		
 	}
 	
 	return 0;

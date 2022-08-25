@@ -22,9 +22,9 @@
 
 /*******************************_SELECT_MC_PINS********************************/
 
-#define LCD_RS_PIN			PB1
-#define LCD_RW_PIN			PB2
-#define LCD_EN_PIN			PB3
+#define LCD_RS_PIN			PA1
+#define LCD_RW_PIN			PA2
+#define LCD_EN_PIN			PA3
 #define LCD_DATA_4_PIN		PA4
 #define LCD_DATA_5_PIN		PA5
 #define LCD_DATA_6_PIN		PA6
