@@ -11,8 +11,8 @@
 
 
 
-#define		LED_0	PD3
-#define		LED_1	PC7
+#define		LED_0	PC2
+#define		LED_1	PC3
 #define		LED_2	PD3
 
 

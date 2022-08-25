@@ -24,6 +24,7 @@ u8 UserLogin ( u8* ID, u8* Password);
 void CheckEEPROM(void);
 void DeleteUser (u8 NumberOfUsers, u8* ID);
 void DeleteAll (void);
+void ACSwitch (u8 ACOpened);
 
 /************************************************************************/
 /*	Admin Password is 1234
@@ -43,6 +44,8 @@ int main ()
 	H_Eeprom_Init();
 	H_DcMotor_Init();
 	H_Lm35_Init();
+	H_Led_Init(LED_0);
+	H_Led_Init(LED_1);
 	
 	char NumberOfUsers = 0;
 
@@ -74,27 +77,16 @@ int main ()
 // 	H_Lcd_Clear();
 // 	UserLogin(UserID,UserPassword);	
 	
-	u16 LM35Read =0;
+	ACSwitch(0);
+	_delay_ms(2000);
 	
-// 	H_DcMotor_SetDirection(CW);
-// 	H_DcMotor_Speed(100);
-// 	H_DcMotor_Start(	
 	while (1)
 	{
-		LM35Read = H_Lm35_Read();
-		H_Lcd_WriteNumber(LM35Read);
 		_delay_ms(100);
 		H_Lcd_Clear();
-		if (LM35Read > 25)
-		{
-			H_DcMotor_SetDirection(CW);
-			H_DcMotor_Speed(100);
-			H_DcMotor_Start();
-		}
-		else
-		{
-			H_DcMotor_Stop();
-		}
+		
+		H_Lcd_WriteNumber(H_Lm35_Read());
+		ACSwitch(1);
 		
 	}
 	
@@ -461,13 +453,13 @@ u8 SwitchDoor (u8 DoorOpened)
 	return DoorOpened;
 }
 
-u8 ACSwitch (u8 ACOpened)
+void ACSwitch (u8 ACOpened)
 {
 	if (ACOpened == 0)
 	{
 		u8 Temperature = 0;
 		Temperature = H_Lm35_Read();
-		if (Temperature >= 26)
+		if (Temperature > 26)
 		{
 			H_Led_On(LED_0);
 			H_Led_Off(LED_1);
@@ -475,22 +467,24 @@ u8 ACSwitch (u8 ACOpened)
 			H_DcMotor_Speed(100);
 			H_DcMotor_Start();
 		}
-		else if (Temperature <= 21)
+		else if (Temperature < 21)
 		{
 			H_Led_On(LED_1);
 			H_Led_Off(LED_0);
 			H_DcMotor_Stop();
 		}
 		
-		ACOpened = 1;
+		
 	}
 	else
 	{
 		H_DcMotor_Stop();
-		ACOpened = 0;
+		H_Led_Off(LED_1);
+		H_Led_Off(LED_0);
+		
 	}
 		
-	return ACOpened;
+	
 }
 
 void CheckEEPROM (void)
