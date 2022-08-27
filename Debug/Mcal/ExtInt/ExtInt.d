@@ -1,6 +1,6 @@
 Mcal/ExtInt/ExtInt.d Mcal/ExtInt/ExtInt.o: ../Mcal/ExtInt/ExtInt.c \
- ../Mcal/ExtInt/ExtInt.h ../Mcal/Dio/Dio.h ../Mcal/Reg.h \
- ../App/StdTypes.h ../App/BitMath.h ../Mcal/ExtInt/ExtIntCfg.h \
+ ../Mcal/ExtInt/ExtInt.h ../Mcal/Reg.h ../App/StdTypes.h ../App/BitMath.h \
+ ../Mcal/ExtInt/ExtIntCfg.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\interrupt.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\io.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\sfr_defs.h \
@@ -21,8 +21,6 @@ Mcal/ExtInt/ExtInt.d Mcal/ExtInt/ExtInt.o: ../Mcal/ExtInt/ExtInt.c \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stddef.h
 
 ../Mcal/ExtInt/ExtInt.h:
-
-../Mcal/Dio/Dio.h:
 
 ../Mcal/Reg.h:
 

@@ -12,6 +12,8 @@
 #define ADMIN_SECOND_PAGE		 1
 #define USER_SECOND_PAGE		 2
 #define ADMIN_THIRD_PAGE		 3
+#define ADMIN_FOURTH_PAGE		 4
+#define IDLE_STATE				 5
 	
 
 #include "Led.h"
@@ -23,7 +25,7 @@
 #include "DcMotor.h"
 #include "Lm35.h"
 #include "Eeprom.h"
-#include "ExtInt.h"
+//#include "ExtInt.h"
 #define F_CPU 16000000UL
 #include <util/delay.h>
 
@@ -41,6 +43,8 @@ void AppInit(void);
 void CloseTheDoor(void);
 void WelcomingMsg(void);
 void A_Main_ExtInt0Exc (void);
+void CheckAC(u8 ACState);
+void CheckDoor(u8 DoorState);
 
 u8 AppState = WELCOME;
 
@@ -91,7 +95,6 @@ int main ()
 	u8 Trails = 0;
 	u8 DoorState = 0;
 	u8 ACState = 0;
-	
 	
 	
 	while (1)
@@ -225,34 +228,95 @@ int main ()
 				break;
 			
 			case ADMIN_SECOND_PAGE:
-			 H_Lcd_Clear();
-			 H_Lcd_WriteString(" 1:Switch Door  ");
-			 H_Lcd_GoTo(1,0);
-			 H_Lcd_WriteString("2:AddUser 3:Next");
-			 KeyPressed = H_KeyPad_Read();
-			 while(!KeyPressed)
-			{
+				H_Lcd_Clear();
+				H_Lcd_WriteString(" 1:Switch Door  ");
+				H_Lcd_GoTo(1,0);
+				H_Lcd_WriteString("2:AddUser 3:Next");
 				KeyPressed = H_KeyPad_Read();
-				if (KeyPressed == '1')
+				while(!KeyPressed)
 				{
-					SwitchDoor(&DoorState);
+					KeyPressed = H_KeyPad_Read();
+					if (KeyPressed == '1')
+					{
+						SwitchDoor(&DoorState);
+					}
+					else if (KeyPressed == '2')
+					{
+						H_Lcd_Clear();
+						H_Lcd_WriteString("Enter Username");
+						InputID(UserID);
+						H_Lcd_Clear();
+						H_Lcd_WriteString("Enter Password");
+						InputPassword(UserPassword);
+						AddUser(UserID, UserPassword);
+					}
+					else if (KeyPressed == '3')
+					{
+						AppState = ADMIN_THIRD_PAGE;
+					}		
 				}
-				else if (KeyPressed == '2')
+				break;
+			case ADMIN_THIRD_PAGE:
+				H_Lcd_Clear();        
+				H_Lcd_WriteString(" 4:Remove User  ");
+				H_Lcd_GoTo(1,0);
+				H_Lcd_WriteString("5:Back 6:Next");
+				KeyPressed = H_KeyPad_Read();
+				while(!KeyPressed)
 				{
-					H_Lcd_Clear();
-					H_Lcd_WriteString("Enter Username");
-					InputID(UserID);
-					H_Lcd_Clear();
-					H_Lcd_WriteString("Enter Password");
-					InputPassword(UserPassword);
-					AddUser(UserID, UserPassword);
+					KeyPressed = H_KeyPad_Read();
+					if (KeyPressed == '4')
+					{
+						H_Lcd_Clear();
+						H_Lcd_WriteString("Enter Username");
+						InputID(UserID);
+						H_Lcd_Clear();
+						DeleteUser(NumberOfUsers,UserID);
+					}
+					else if (KeyPressed == '5')
+					{
+						AppState = ADMIN_SECOND_PAGE;
+					}
+					else if (KeyPressed == '6')
+					{
+						AppState = ADMIN_FOURTH_PAGE;
+					}
 				}
-				else if (KeyPressed == '3')
+				break;
+			case ADMIN_FOURTH_PAGE:
+				H_Lcd_Clear();
+				H_Lcd_WriteString(" 7:Switch AC  ");
+				H_Lcd_GoTo(1,0);
+				H_Lcd_WriteString("8:1stPage 9:Done");
+				KeyPressed = H_KeyPad_Read();
+				while(!KeyPressed)
 				{
-					AppState = ADMIN_THIRD_PAGE;
+					KeyPressed = H_KeyPad_Read();
+					if (KeyPressed == '7')
+					{
+						ACSwitch(&ACState);
+					}
+					else if (KeyPressed == '8')
+					{
+						AppState = ADMIN_SECOND_PAGE;
+					}
+					else if (KeyPressed == '9')
+					{
+						AppState = IDLE_STATE;
+					}
 				}
-					
-			}
+				break;
+			case IDLE_STATE:
+				KeyPressed = H_KeyPad_Read();
+				while(!KeyPressed)
+				{
+					KeyPressed = H_KeyPad_Read();
+					CheckAC(ACState);
+					CheckDoor(DoorState);
+				}
+				AppState = WELCOME;
+				break;
+				
 		}
 			
 	}
@@ -655,6 +719,7 @@ void SwitchDoor (u8* DoorOpened)
 
 void ACSwitch (u8* ACOpened)
 {
+	H_Led_On(LED_1);
 	if (*ACOpened == 0)
 	{
 		u8 Temperature = 0;
@@ -746,5 +811,58 @@ void CloseTheDoor(void)
 
 void A_Main_ExtInt0Exc (void)
 {
+	
+}
+
+void CheckAC(u8 ACState)
+{
+	if (ACState == 1)
+	{
+		u8 Temperature = 0;
+		Temperature = H_Lm35_Read();
+		if (Temperature > 26)
+		{
+			H_Led_On(LED_0);
+			H_Led_Off(LED_1);
+			H_DcMotor_SetDirection(CW);
+			H_DcMotor_Speed(100);
+			H_DcMotor_Start();
+		}
+		else if (Temperature < 21)
+		{
+			H_Led_On(LED_1);
+			H_Led_Off(LED_0);
+			H_DcMotor_Stop();
+		}
+		H_Lcd_Clear();
+		H_Lcd_WriteString("AC Opened");
+	}
+	else 
+	{
+		H_DcMotor_Stop();
+		H_Led_Off(LED_1);
+		H_Led_Off(LED_0);
+		H_Lcd_Clear();
+		H_Lcd_WriteString("AC Closed");	
+	}
+}
+
+void CheckDoor(u8 DoorState)
+{
+	if (DoorState == 1)
+	{
+		H_Lcd_GoTo(1,0);
+		H_Lcd_WriteString("Door Is Opened");
+		H_Servo_SetAngel(120);
+		_delay_ms(500);
+	}
+	else
+	{
+		H_Lcd_GoTo(1,0);
+		H_Lcd_WriteString("Door Is Closed");
+		H_Servo_SetAngel(0);
+		_delay_ms(500);
+		
+	}
 	
 }
