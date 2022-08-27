@@ -116,6 +116,8 @@
       <Value>../Mcal/I2C</Value>
       <Value>../Hal/EEPROM</Value>
       <Value>../Mcal/Timer2</Value>
+      <Value>../Hal/PushButton</Value>
+      <Value>../Mcal/ExtInt</Value>
     </ListValues>
   </avrgcc.compiler.directories.IncludePaths>
   <avrgcc.compiler.optimization.level>Optimize debugging experience (-Og)</avrgcc.compiler.optimization.level>
@@ -210,6 +212,15 @@
     <Compile Include="Hal\LM35\Lm35Cfg.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="Hal\PushButton\PushButton.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Hal\PushButton\PushButton.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Hal\PushButton\PushButtonCfg.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="Hal\Servo\Servo.c">
       <SubType>compile</SubType>
     </Compile>
@@ -232,6 +243,15 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Mcal\Dio\Dio.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Mcal\ExtInt\ExtInt.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Mcal\ExtInt\ExtInt.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Mcal\ExtInt\ExtIntCfg.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Mcal\I2C\I2c.c">
@@ -284,12 +304,14 @@
     <Folder Include="Hal\Keypad" />
     <Folder Include="Hal\Buzzer" />
     <Folder Include="Hal\EEPROM" />
+    <Folder Include="Hal\PushButton" />
     <Folder Include="Hal\Relay" />
     <Folder Include="Hal\Servo" />
     <Folder Include="Mcal" />
     <Folder Include="Mcal\Dio" />
     <Folder Include="Mcal\Adc" />
     <Folder Include="Mcal\I2C" />
+    <Folder Include="Mcal\ExtInt" />
     <Folder Include="Mcal\Timer2" />
     <Folder Include="Mcal\Timer0" />
     <Folder Include="Mcal\Timer1" />

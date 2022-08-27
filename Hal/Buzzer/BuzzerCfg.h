@@ -10,7 +10,7 @@
 #define BUZZERCFG_H_
 
 
-#define BUZZERPIN	PD2
+#define BUZZERPIN	PD3
 
 
 

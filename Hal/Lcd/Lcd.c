@@ -261,7 +261,9 @@ void H_Lcd_WriteNumber		(s32 Local_s32_Number)
 
 void H_Lcd_Clear (void)
 {
+	
 	H_Lcd_WriteCommand(LCD_CMD_CLEAR);	// to clear LCD
+	H_Lcd_GoTo(0,0);
 }
 
 void H_Lcd_GoTo	(u8 Local_u8_Row,u8 Local_u8_Coloumn )

@@ -18,11 +18,15 @@ Hal\Led\Led.c
 
 Hal\LM35\Lm35.c
 
+Hal\PushButton\PushButton.c
+
 Hal\Servo\Servo.c
 
 Mcal\Adc\Adc.c
 
 Mcal\Dio\Dio.c
+
+Mcal\ExtInt\ExtInt.c
 
 Mcal\I2C\I2c.c
 

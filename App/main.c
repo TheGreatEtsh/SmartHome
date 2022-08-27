@@ -5,14 +5,21 @@
  * Author : Ahmed Hesham
  */ 
 
+#define FIRST_PAGE				'0'
+#define ADMIN_LOGIN_PAGE		'1'
+#define USER_LOGIN_PAGE			'2'
+#define WELCOME					 0
+
 #include "Led.h"
 #include "Buzzer.h"
+#include "PushButton.h"
 #include "Lcd.h"
 #include "KeyPad.h"
 #include "Servo.h"
 #include "DcMotor.h"
 #include "Lm35.h"
 #include "Eeprom.h"
+#include "ExtInt.h"
 #define F_CPU 16000000UL
 #include <util/delay.h>
 
@@ -27,7 +34,12 @@ void DeleteAll (void);
 void ACSwitch (u8 ACOpened);
 void SwitchDoor (u8 DoorOpened);
 void AppInit(void);
+void CloseTheDoor(void);
 void WelcomingMsg(void);
+void A_Main_ExtInt0Exc (void);
+
+u8 AppState = WELCOME;
+
 /************************************************************************/
 /*	Admin Password is 1234
 	Admin UserName is 123							
@@ -59,15 +71,120 @@ int main ()
 	H_Servo_Init();
 	H_Led_Init(LED_0);
 	H_Led_Init(LED_1);
+	H_Buzzer_Init();
+	H_PushButton_Init(PUSH_BUTTON_0);
+	
+	M_ExtInt_Init(INT0);
+	
+	M_ExtInt_SetCallBackInt0(A_Main_ExtInt0Exc);
 	
 	char NumberOfUsers = 0;
 
 	NumberOfUsers = H_Eeprom_Read(0,100);
  	u8 UserID		[3]	= {0,0,0};
  	u8 UserPassword [4] = {0,0,0,0};	
-	u8 AppState = 0;
+	u8 KeyPressed = 0;
+	u8 Trails = 0;
 	
-	WelcomingMsg();
+	
+	
+	
+	while (1)
+	{
+		switch(AppState)
+		{
+			case WELCOME :
+				WelcomingMsg();
+				AppState = FIRST_PAGE;
+				break;
+			case FIRST_PAGE:
+				H_Lcd_Clear();
+				H_Lcd_WriteString("    Welcome     ");
+				H_Lcd_GoTo(1,0);
+				H_Lcd_WriteString("1:Admin 2:User");
+				KeyPressed = H_KeyPad_Read();
+				while(!KeyPressed)
+				{
+					KeyPressed = H_KeyPad_Read();
+					if (KeyPressed == '1')
+					{	
+						AppState = ADMIN_LOGIN_PAGE;
+					}
+					else if (KeyPressed == '2')
+					{
+						AppState = USER_LOGIN_PAGE;
+					}
+					else
+					{
+						/*DO NOTHING*/
+					}
+					
+				}
+				break;
+			
+			case ADMIN_LOGIN_PAGE:
+				H_Lcd_Clear();
+				H_Lcd_WriteString("Welcome Admin");
+				_delay_ms(1000);
+				H_Lcd_Clear();
+ 				while(Trails < 3)
+				{
+					H_Lcd_WriteString("Enter Username");
+ 					InputID(UserID);
+					H_Lcd_Clear();
+					H_Lcd_WriteString("Enter Password");
+					InputPassword(UserPassword);
+					
+					if (AdminLogin(UserID,UserPassword) == 0)
+					{
+						AppState = WELCOME;
+						break;
+					}
+					else 
+					{
+						Trails++;
+						H_Buzzer_On();
+						CloseTheDoor();
+						KeyPressed = H_PushButton_Read(PUSH_BUTTON_0);
+						while (1)
+						{
+							if (H_PushButton_Read(PUSH_BUTTON_2) == PRESSED)
+							{
+								_delay_ms(80);
+								if (H_PushButton_Read(PUSH_BUTTON_2) == PRESSED)
+								{
+									H_Buzzer_Off();
+									break;
+									while(H_PushButton_Read(PUSH_BUTTON_2) == PRESSED);
+									
+								}
+							}
+						}
+						AppState = WELCOME;
+						H_Buzzer_Off();
+						H_Lcd_WriteString("Fixed");
+						
+						
+					}
+					 
+					
+				}
+				break;
+			case USER_LOGIN_PAGE:
+				H_Lcd_Clear();
+				H_Lcd_WriteString("Welcome User");
+				_delay_ms(1000);
+				H_Lcd_Clear();
+				H_Lcd_WriteString("Enter Username");
+				InputPassword(UserID);
+				H_Lcd_WriteString("Enter Password");
+				InputPassword(UserPassword);
+				break;
+		}
+			
+	}
+	
+	
 	
 // 	H_Lcd_Clear();
 // 	H_Lcd_WriteString("Enter ID");
@@ -100,10 +217,6 @@ int main ()
 // 	SwitchDoor(1);
 	
 	
-	while (1)
-	{
-		
-	}
 	
 	return 0;
 }
@@ -338,6 +451,9 @@ u8 AdminLogin (u8* ID, u8* Password)
 	{
 		/*Do Nothing*/
 	}
+	_delay_ms(300);
+	H_Lcd_Clear();
+	_delay_ms(300);
 	return WrongEntry;
 }
 
@@ -453,6 +569,7 @@ void InputPassword (u8* Password)
 		}
 	}
 	_delay_ms(300);
+
 }
 void SwitchDoor (u8 DoorOpened)
 {
@@ -558,4 +675,14 @@ void WelcomingMsg(void)
 	H_Lcd_WriteString("Home Project");
 	_delay_ms(2000);
 	H_Lcd_Clear();
+}
+
+void CloseTheDoor(void)
+{
+	H_Servo_SetAngel(0);
+}
+
+void A_Main_ExtInt0Exc (void)
+{
+	
 }

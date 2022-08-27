@@ -48,7 +48,7 @@ void M_I2c_SendSByte(u8 Local_u8_Byte)
 	SetBit(TWCR,7);                  //   to clear the flag bit
 	while(GetBit(TWCR,7) == 0);
 	while((TWSR & 0xF8) != WR_BYTE_ACK);
-	_delay_ms(10);
+	_delay_ms(100);
 }
 u8   M_I2c_ReadByte(void)
 {
