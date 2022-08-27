@@ -10,14 +10,14 @@
 #define KEYPADCFG_H_
 
 
-#define KEYPAD_R0_PIN	PB0
-#define KEYPAD_R1_PIN	PB1
-#define KEYPAD_R2_PIN	PB2
-#define KEYPAD_R3_PIN	PB3
-#define KEYPAD_C0_PIN	PB4
-#define KEYPAD_C1_PIN	PB5
-#define KEYPAD_C2_PIN	PB6
-#define KEYPAD_C3_PIN	PB7
+#define KEYPAD_R0_PIN	PC4
+#define KEYPAD_R1_PIN	PC5
+#define KEYPAD_R2_PIN	PC6
+#define KEYPAD_R3_PIN	PC7
+#define KEYPAD_C0_PIN	PD2
+#define KEYPAD_C1_PIN	PD3
+#define KEYPAD_C2_PIN	PA7
+#define KEYPAD_C3_PIN	PB3
 
 
 

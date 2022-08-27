@@ -18,16 +18,16 @@
 
 /****************************_SELECT_DATA_REGISTER********************************/
 
-#define LCD_DATA_PORT		PORTA
+#define LCD_DATA_PORT		PORTB
 
 /*******************************_SELECT_MC_PINS********************************/
 
-#define LCD_RS_PIN			PA1
-#define LCD_RW_PIN			PA2
-#define LCD_EN_PIN			PA3
-#define LCD_DATA_4_PIN		PA4
-#define LCD_DATA_5_PIN		PA5
-#define LCD_DATA_6_PIN		PA6
-#define LCD_DATA_7_PIN		PA7
+#define LCD_RS_PIN			PB0 
+#define LCD_RW_PIN			PB1
+#define LCD_EN_PIN			PB2
+#define LCD_DATA_4_PIN		PB4
+#define LCD_DATA_5_PIN		PB5
+#define LCD_DATA_6_PIN		PB6
+#define LCD_DATA_7_PIN		PB7
 
 #endif /* LCDCFG_H_ */

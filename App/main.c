@@ -25,13 +25,25 @@ void CheckEEPROM(void);
 void DeleteUser (u8 NumberOfUsers, u8* ID);
 void DeleteAll (void);
 void ACSwitch (u8 ACOpened);
-
+void SwitchDoor (u8 DoorOpened);
+void AppInit(void);
+void WelcomingMsg(void);
 /************************************************************************/
 /*	Admin Password is 1234
 	Admin UserName is 123							
 	Admin Location is @ 101 byte address page 1							*/
 /************************************************************************/
-
+/*int main ()
+{
+	H_Eeprom_Init();
+	//DeleteAll();
+	//AppInit();
+	while(1)
+	{
+		
+	}
+	return 0;
+}*/
 
 /************************************************************************/
 /*                                                                      */
@@ -44,15 +56,19 @@ int main ()
 	H_Eeprom_Init();
 	H_DcMotor_Init();
 	H_Lm35_Init();
+	H_Servo_Init();
 	H_Led_Init(LED_0);
 	H_Led_Init(LED_1);
 	
 	char NumberOfUsers = 0;
 
 	NumberOfUsers = H_Eeprom_Read(0,100);
-
-// 	u8 UserID		[3]	= {0,0,0};
-// 	u8 UserPassword [4] = {0,0,0,0};	
+ 	u8 UserID		[3]	= {0,0,0};
+ 	u8 UserPassword [4] = {0,0,0,0};	
+	u8 AppState = 0;
+	
+	WelcomingMsg();
+	
 // 	H_Lcd_Clear();
 // 	H_Lcd_WriteString("Enter ID");
 // 	InputID(UserID);
@@ -77,21 +93,22 @@ int main ()
 // 	H_Lcd_Clear();
 // 	UserLogin(UserID,UserPassword);	
 	
-	ACSwitch(0);
-	_delay_ms(2000);
+// 	ACSwitch(0);
+// // 	
+// 	SwitchDoor(0);
+// 	_delay_ms(2000);
+// 	SwitchDoor(1);
+	
 	
 	while (1)
 	{
-		_delay_ms(100);
-		H_Lcd_Clear();
-		
-		H_Lcd_WriteNumber(H_Lm35_Read());
-		ACSwitch(1);
 		
 	}
 	
 	return 0;
 }
+
+
 
 
 void AddUser (u8* ID, u8* Password)
@@ -437,20 +454,25 @@ void InputPassword (u8* Password)
 	}
 	_delay_ms(300);
 }
-
-u8 SwitchDoor (u8 DoorOpened)
+void SwitchDoor (u8 DoorOpened)
 {
 	if (DoorOpened == 0)
 	{
+		H_Lcd_Clear();
+		H_Lcd_GoTo(0,0);
+		H_Lcd_WriteString("Door Is Opened");
 		H_Servo_SetAngel(120);
 		DoorOpened = 1;
 	}
 	else
 	{
+		H_Lcd_Clear();
+		H_Lcd_GoTo(0,0);
+		H_Lcd_WriteString("Door Is Closed");
 		H_Servo_SetAngel(0);
 		DoorOpened = 0;
 	}
-	return DoorOpened;
+	
 }
 
 void ACSwitch (u8 ACOpened)
@@ -510,9 +532,30 @@ void CheckEEPROM (void)
 
 void DeleteAll (void)
 {
-	for (u8 i = 0; i<100 ; i++)
+	for (u8 i = 0; i<0xFF ; i++)
 	{
 	 	H_Eeprom_Write(0xFF,0,i);
 	}
 	H_Eeprom_Write(0,0,100);
+}
+
+void AppInit(void)
+{
+	H_Eeprom_Write('1',0,101);
+	H_Eeprom_Write('2',0,102);
+	H_Eeprom_Write('3',0,103);	
+	H_Eeprom_Write('1',0,104);	
+	H_Eeprom_Write('2',0,105);	
+	H_Eeprom_Write('3',0,106);	
+	H_Eeprom_Write('4',0,107);		
+}
+
+void WelcomingMsg(void)
+{
+	H_Lcd_Clear();
+	H_Lcd_WriteString("Welcome to Smart");
+	H_Lcd_GoTo(1,0);
+	H_Lcd_WriteString("Home Project");
+	_delay_ms(2000);
+	H_Lcd_Clear();
 }
