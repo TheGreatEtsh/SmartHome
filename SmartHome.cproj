@@ -115,6 +115,9 @@
       <Value>../Mcal/Timer0</Value>
       <Value>../Mcal/I2C</Value>
       <Value>../Hal/EEPROM</Value>
+      <Value>../Mcal/ExtInt</Value>
+      <Value>../Mcal/Uart</Value>
+      <Value>../Hal/Hc05</Value>
     </ListValues>
   </avrgcc.compiler.directories.IncludePaths>
   <avrgcc.compiler.optimization.level>Optimize debugging experience (-Og)</avrgcc.compiler.optimization.level>
@@ -137,13 +140,7 @@
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="App\BitMath.h">
-      <SubType>compile</SubType>
-    </Compile>
     <Compile Include="App\main.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="App\StdTypes.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Hal\Buzzer\Buzzer.c">
@@ -171,6 +168,15 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Hal\EEPROM\EepromCfg.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Hal\Hc05\Hc05.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Hal\Hc05\Hc05.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Hal\Hc05\Hc05Cfg.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Hal\Keypad\KeyPad.c">
@@ -227,10 +233,22 @@
     <Compile Include="Mcal\Adc\AdcCfg.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="Mcal\BitMath.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="Mcal\Dio\Dio.c">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Mcal\Dio\Dio.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Mcal\ExtInt\ExtInt.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Mcal\ExtInt\ExtInt.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Mcal\ExtInt\ExtIntCfg.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Mcal\I2C\I2c.c">
@@ -243,6 +261,9 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Mcal\Reg.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Mcal\StdTypes.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Mcal\Timer0\Timer0.c">
@@ -263,6 +284,15 @@
     <Compile Include="Mcal\Timer1\Timer1Cfg.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="Mcal\Uart\Uart.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Mcal\Uart\Uart.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Mcal\Uart\UartCfg.h">
+      <SubType>compile</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App" />
@@ -274,12 +304,15 @@
     <Folder Include="Hal\Keypad" />
     <Folder Include="Hal\Buzzer" />
     <Folder Include="Hal\EEPROM" />
+    <Folder Include="Hal\Hc05" />
     <Folder Include="Hal\Relay" />
     <Folder Include="Hal\Servo" />
     <Folder Include="Mcal" />
     <Folder Include="Mcal\Dio" />
     <Folder Include="Mcal\Adc" />
     <Folder Include="Mcal\I2C" />
+    <Folder Include="Mcal\ExtInt" />
+    <Folder Include="Mcal\Uart" />
     <Folder Include="Mcal\Timer0" />
     <Folder Include="Mcal\Timer1" />
   </ItemGroup>

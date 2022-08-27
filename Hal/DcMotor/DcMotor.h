@@ -25,7 +25,7 @@
 
 void H_DcMotor_Init				(void);
 void H_DcMotor_SetDirection		(u8 Local_u8_Direction);
-void H_DcMotor_Speed			(u8 Local_u8_Speed);
+void H_DcMotor_SetSpeed(u8 Local_u8_Speed);
 void H_DcMotor_Start			(void);
 void H_DcMotor_Stop				(void);
 

@@ -10,6 +10,8 @@ Hal\DcMotor\DcMotor.c
 
 Hal\EEPROM\Eeprom.c
 
+Hal\Hc05\Hc05.c
+
 Hal\Keypad\KeyPad.c
 
 Hal\Lcd\Lcd.c
@@ -24,9 +26,13 @@ Mcal\Adc\Adc.c
 
 Mcal\Dio\Dio.c
 
+Mcal\ExtInt\ExtInt.c
+
 Mcal\I2C\I2c.c
 
 Mcal\Timer0\Timer0.c
 
 Mcal\Timer1\Timer1.c
+
+Mcal\Uart\Uart.c
 
