@@ -195,7 +195,21 @@
 #define TWBR1		bit1
 #define TWBR0		bit0
 
+/********************************_TIMER1_REGISTERS_**********************************/
+#define TCCR2		(*(volatile u8*)0x45)
+#define FOC2		bit7
+#define WGM20		bit6
+#define COM21		bit5
+#define	COM20		bit4
+#define WGM21		bit3
+#define CS22		bit2
+#define	CS21		bit1
+#define	CS20		bit0
 
+#define TCNT2		(*(volatile u8*)0x44)
+
+#define OCR2		(*(volatile u8*)0x43)
+ 
 
 
 

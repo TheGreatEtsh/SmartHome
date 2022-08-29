@@ -7,11 +7,11 @@ Hal/DcMotor/DcMotor.d Hal/DcMotor/DcMotor.o: ../Hal/DcMotor/DcMotor.c \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\util\delay_basic.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\math.h \
  ../Mcal/Dio/Dio.h ../Mcal/Reg.h ../App/StdTypes.h ../App/BitMath.h \
- ../Mcal/Timer0/Timer0.h \
+ ../Mcal/Timer2/Timer2.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdio.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdarg.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stddef.h \
- ../Mcal/Timer0/Timer0Cfg.h ../Hal/DcMotor/DcMotorCfg.h
+ ../Mcal/Timer2/Timer2Cfg.h ../Hal/DcMotor/DcMotorCfg.h
 
 ../Hal/DcMotor/DcMotor.h:
 
@@ -35,7 +35,7 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\
 
 ../App/BitMath.h:
 
-../Mcal/Timer0/Timer0.h:
+../Mcal/Timer2/Timer2.h:
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdio.h:
 
@@ -43,6 +43,6 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stddef.h:
 
-../Mcal/Timer0/Timer0Cfg.h:
+../Mcal/Timer2/Timer2Cfg.h:
 
 ../Hal/DcMotor/DcMotorCfg.h:

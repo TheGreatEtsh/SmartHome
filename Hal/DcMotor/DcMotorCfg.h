@@ -9,8 +9,8 @@
 #ifndef DCMOTORCFG_H_
 #define DCMOTORCFG_H_
 
-#define DC_MOTOR_PIN_0			PB0
-#define DC_MOTOR_PIN_1			PB1
+#define DC_MOTOR_PIN_0			PD4
+#define DC_MOTOR_PIN_1			PD6
 
 
 #endif /* DCMOTORCFG_H_ */

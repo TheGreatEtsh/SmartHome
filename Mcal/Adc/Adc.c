@@ -32,7 +32,7 @@ void M_Adc_Init (void)
 	#endif				
 	
 	/* Step 3	->		Set Pin Used  */
-	ClrBit(ADMUX,MUX4); ClrBit(ADMUX,MUX3); ClrBit(ADMUX,MUX2); ClrBit(ADMUX,MUX1); SetBit(ADMUX,MUX0);
+	ClrBit(ADMUX,MUX4); ClrBit(ADMUX,MUX3); ClrBit(ADMUX,MUX2); ClrBit(ADMUX,MUX1); ClrBit(ADMUX,MUX0);
 	
 	/* Step 4	->		Set ADC Prescaler Selection */
 	#if			PRESCALER_SELECTION		==		DIVISION_FACTOR_1
