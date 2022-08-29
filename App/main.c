@@ -25,6 +25,7 @@
 #include "DcMotor.h"
 #include "Lm35.h"
 #include "Eeprom.h"
+#include "Relay.h"
 //#include "ExtInt.h"
 #define F_CPU 16000000UL
 #include <util/delay.h>
@@ -80,11 +81,12 @@ int main ()
 	H_Led_Init(LED_0);
 	H_Led_Init(LED_1);
 	H_Buzzer_Init();
-	H_PushButton_Init(PUSH_BUTTON_0);
+	H_PushButton_Init();
+	H_Relay_Init();
 	
-	M_ExtInt_Init(INT0);
+	//M_ExtInt_Init(INT0);
 	
-	M_ExtInt_SetCallBackInt0(A_Main_ExtInt0Exc);
+//	M_ExtInt_SetCallBackInt0(A_Main_ExtInt0Exc);
 	
 	char NumberOfUsers = 0;
 
@@ -95,6 +97,8 @@ int main ()
 	u8 Trails = 0;
 	u8 DoorState = 0;
 	u8 ACState = 0;
+	
+
 	
 	
 	while (1)
@@ -131,6 +135,7 @@ int main ()
 				break;
 			
 			case ADMIN_LOGIN_PAGE:
+				Trails = 0;
 				H_Lcd_Clear();
 				H_Lcd_WriteString("Welcome Admin");
 				_delay_ms(1000);
@@ -155,16 +160,17 @@ int main ()
 						{
 							H_Buzzer_On();
 							CloseTheDoor();
-							KeyPressed = H_PushButton_Read(PUSH_BUTTON_0);
+							KeyPressed = H_PushButton_Read();
 							while (1)
 							{
-								if (H_PushButton_Read(PUSH_BUTTON_2) == PRESSED)
+								if (H_PushButton_Read() == PRESSED)
 								{
 									_delay_ms(80);
-									if (H_PushButton_Read(PUSH_BUTTON_2) == PRESSED)
+									if (H_PushButton_Read() == PRESSED)
 									{
-										while(H_PushButton_Read(PUSH_BUTTON_2) == PRESSED);	
+										while(H_PushButton_Read() == PRESSED);	
 										H_Buzzer_Off();
+										AppState = WELCOME;
 										break;
 									}
 								}	
@@ -177,6 +183,7 @@ int main ()
 				
 			
 			case USER_LOGIN_PAGE:
+				Trails = 0;
 				H_Lcd_Clear();
 				H_Lcd_WriteString("Welcome User");
 				_delay_ms(1000);
@@ -188,8 +195,8 @@ int main ()
 					H_Lcd_Clear();
 					H_Lcd_WriteString("Enter Password");
 					InputPassword(UserPassword);
-					Trails = 0;
 					u8 LoginResult = UserLogin(UserID,UserPassword);
+					
 					if (LoginResult == 0)
 					{
 						AppState = USER_SECOND_PAGE;
@@ -200,23 +207,25 @@ int main ()
 						AppState = FIRST_PAGE;
 						break;
 					}
-					else
+					else if (LoginResult == 1)
 					{
 						Trails++;
 						if (Trails == 3)
 						{
 							H_Buzzer_On();
 							CloseTheDoor();
-							KeyPressed = H_PushButton_Read(PUSH_BUTTON_0);
+							H_Lcd_Clear();
+							KeyPressed = H_PushButton_Read();
 							while (1)
 							{
-								if (H_PushButton_Read(PUSH_BUTTON_2) == PRESSED)
+								if (H_PushButton_Read() == PRESSED)
 								{
 									_delay_ms(80);
-									if (H_PushButton_Read(PUSH_BUTTON_2) == PRESSED)
+									if (H_PushButton_Read() == PRESSED)
 									{
-										while(H_PushButton_Read(PUSH_BUTTON_2) == PRESSED);
+										while(H_PushButton_Read() == PRESSED);
 										H_Buzzer_Off();
+										AppState = WELCOME;
 										break;
 									}
 								}
@@ -306,6 +315,7 @@ int main ()
 					}
 				}
 				break;
+				
 			case IDLE_STATE:
 				KeyPressed = H_KeyPad_Read();
 				while(!KeyPressed)
@@ -317,6 +327,25 @@ int main ()
 				AppState = WELCOME;
 				break;
 				
+			case USER_SECOND_PAGE :
+				H_Lcd_Clear();
+				H_Lcd_WriteString(" 1:Switch AC  ");
+				H_Lcd_GoTo(1,0);
+				H_Lcd_WriteString("   2: Done    ");
+				KeyPressed = H_KeyPad_Read();
+				while(!KeyPressed)
+				{
+					KeyPressed = H_KeyPad_Read();
+					if (KeyPressed == '1')
+					{
+						ACSwitch(&ACState);
+					}
+					else if (KeyPressed == '2')
+					{
+						AppState = IDLE_STATE;
+					}
+				}
+				break;	
 		}
 			
 	}
@@ -630,10 +659,13 @@ u8 UserLogin (u8* ID, u8* Password)
 		else
 		{
 			/*print on LCD Invalid Username Or Password*/
+			H_Lcd_Clear();
 			H_Lcd_WriteString("Invalid Username");
 			H_Lcd_GoTo(1,0);
 			H_Lcd_WriteString("Or Password");
+			_delay_ms(1000);
 			WrongEntry++;
+			
 		}
 	}
 	else
@@ -646,7 +678,6 @@ u8 UserLogin (u8* ID, u8* Password)
 		_delay_ms(1000);
 		WrongEntry = 2;
 	}
-	
 	return WrongEntry;
 }
 
@@ -701,6 +732,7 @@ void SwitchDoor (u8* DoorOpened)
 		H_Lcd_Clear();
 		H_Lcd_GoTo(0,0);
 		H_Lcd_WriteString("Door Is Opened");
+		H_Relay_On();
 		H_Servo_SetAngel(120);
 		_delay_ms(500);
 		*DoorOpened = 1;
@@ -710,6 +742,7 @@ void SwitchDoor (u8* DoorOpened)
 		H_Lcd_Clear();
 		H_Lcd_GoTo(0,0);
 		H_Lcd_WriteString("Door Is Closed");
+		H_Relay_Off();
 		H_Servo_SetAngel(0);
 		_delay_ms(500);
 		*DoorOpened = 0;
@@ -807,20 +840,21 @@ void WelcomingMsg(void)
 void CloseTheDoor(void)
 {
 	H_Servo_SetAngel(0);
+	H_Relay_Off();
 }
 
-void A_Main_ExtInt0Exc (void)
+/*void A_Main_ExtInt0Exc (void)
 {
 	
 }
-
+*/
 void CheckAC(u8 ACState)
 {
 	if (ACState == 1)
 	{
 		u8 Temperature = 0;
 		Temperature = H_Lm35_Read();
-		if (Temperature > 26)
+		if (Temperature >= 26)
 		{
 			H_Led_On(LED_0);
 			H_Led_Off(LED_1);
@@ -854,6 +888,7 @@ void CheckDoor(u8 DoorState)
 		H_Lcd_GoTo(1,0);
 		H_Lcd_WriteString("Door Is Opened");
 		H_Servo_SetAngel(120);
+		H_Relay_On();
 		_delay_ms(500);
 	}
 	else
@@ -861,7 +896,9 @@ void CheckDoor(u8 DoorState)
 		H_Lcd_GoTo(1,0);
 		H_Lcd_WriteString("Door Is Closed");
 		H_Servo_SetAngel(0);
+		H_Relay_Off();
 		_delay_ms(500);
+		
 		
 	}
 	

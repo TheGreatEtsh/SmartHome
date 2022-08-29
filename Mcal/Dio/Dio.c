@@ -114,6 +114,7 @@ void M_Dio_PinPullUp	(u8 Local_u8_PinNumber, u8 Local_u8_PullUpState)
 {
 	u8 Local_u8_Pin		=	Local_u8_PinNumber % 10;
 	u8 Local_u8_Port	=	Local_u8_PinNumber / 10;
+	
 	switch(Local_u8_PullUpState)
 	{
 		case PULLUP_DISABLE:

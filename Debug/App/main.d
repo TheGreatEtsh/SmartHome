@@ -18,7 +18,8 @@ App/main.d App/main.o: ../App/main.c ../Hal/Led/Led.h ../Mcal/Dio/Dio.h \
  ../Mcal/Timer2/Timer2.h ../Mcal/Timer2/Timer2Cfg.h \
  ../Hal/DcMotor/DcMotorCfg.h ../Hal/LM35/Lm35.h ../Mcal/Adc/Adc.h \
  ../Mcal/Adc/AdcCfg.h ../Hal/LM35/Lm35Cfg.h ../Hal/EEPROM/Eeprom.h \
- ../Hal/EEPROM/EepromCfg.h ../Mcal/I2C/I2c.h ../Mcal/I2C/I2cCfg.h
+ ../Hal/EEPROM/EepromCfg.h ../Mcal/I2C/I2c.h ../Mcal/I2C/I2cCfg.h \
+ ../Hal/Relay/Relay.h ../Hal/Relay/RelayCfg.h
 
 ../Hal/Led/Led.h:
 
@@ -97,3 +98,7 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\
 ../Mcal/I2C/I2c.h:
 
 ../Mcal/I2C/I2cCfg.h:
+
+../Hal/Relay/Relay.h:
+
+../Hal/Relay/RelayCfg.h:

@@ -20,6 +20,8 @@ Hal\LM35\Lm35.c
 
 Hal\PushButton\PushButton.c
 
+Hal\Relay\Relay.c
+
 Hal\Servo\Servo.c
 
 Mcal\Adc\Adc.c

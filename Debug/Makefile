@@ -66,6 +66,7 @@ C_SRCS +=  \
 ../Hal/Led/Led.c \
 ../Hal/LM35/Lm35.c \
 ../Hal/PushButton/PushButton.c \
+../Hal/Relay/Relay.c \
 ../Hal/Servo/Servo.c \
 ../Mcal/Adc/Adc.c \
 ../Mcal/Dio/Dio.c \
@@ -92,6 +93,7 @@ Hal/Lcd/Lcd.o \
 Hal/Led/Led.o \
 Hal/LM35/Lm35.o \
 Hal/PushButton/PushButton.o \
+Hal/Relay/Relay.o \
 Hal/Servo/Servo.o \
 Mcal/Adc/Adc.o \
 Mcal/Dio/Dio.o \
@@ -111,6 +113,7 @@ Hal/Lcd/Lcd.o \
 Hal/Led/Led.o \
 Hal/LM35/Lm35.o \
 Hal/PushButton/PushButton.o \
+Hal/Relay/Relay.o \
 Hal/Servo/Servo.o \
 Mcal/Adc/Adc.o \
 Mcal/Dio/Dio.o \
@@ -130,6 +133,7 @@ Hal/Lcd/Lcd.d \
 Hal/Led/Led.d \
 Hal/LM35/Lm35.d \
 Hal/PushButton/PushButton.d \
+Hal/Relay/Relay.d \
 Hal/Servo/Servo.d \
 Mcal/Adc/Adc.d \
 Mcal/Dio/Dio.d \
@@ -149,6 +153,7 @@ Hal/Lcd/Lcd.d \
 Hal/Led/Led.d \
 Hal/LM35/Lm35.d \
 Hal/PushButton/PushButton.d \
+Hal/Relay/Relay.d \
 Hal/Servo/Servo.d \
 Mcal/Adc/Adc.d \
 Mcal/Dio/Dio.d \
@@ -229,6 +234,13 @@ Hal/LM35/Lm35.o: ../Hal/LM35/Lm35.c
 	
 
 Hal/PushButton/PushButton.o: ../Hal/PushButton/PushButton.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I".." -I"../App" -I"../Hal" -I"../Mcal" -I"../Hal/Buzzer" -I"../Hal/DcMotor" -I"../Hal/Keypad" -I"../Hal/Lcd" -I"../Hal/Led" -I"../Hal/LM35" -I"../Hal/Relay" -I"../Hal/Servo" -I"../Mcal/Adc" -I"../Mcal/Dio" -I"../Mcal/Timer1" -I"../Mcal/Timer0" -I"../Mcal/I2C" -I"../Hal/EEPROM" -I"../Mcal/Timer2" -I"../Hal/PushButton" -I"../Mcal/ExtInt"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+Hal/Relay/Relay.o: ../Hal/Relay/Relay.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 5.4.0
 	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I".." -I"../App" -I"../Hal" -I"../Mcal" -I"../Hal/Buzzer" -I"../Hal/DcMotor" -I"../Hal/Keypad" -I"../Hal/Lcd" -I"../Hal/Led" -I"../Hal/LM35" -I"../Hal/Relay" -I"../Hal/Servo" -I"../Mcal/Adc" -I"../Mcal/Dio" -I"../Mcal/Timer1" -I"../Mcal/Timer0" -I"../Mcal/I2C" -I"../Hal/EEPROM" -I"../Mcal/Timer2" -I"../Hal/PushButton" -I"../Mcal/ExtInt"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
